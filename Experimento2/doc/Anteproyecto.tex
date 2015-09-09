@@ -1,0 +1,62 @@
+\documentclass[letterpaper]{article}
+%\usepackage[utf8]{inputenc}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Anteproyecto1\\ Laboratorio de Microcontroladores}
+\author{
+ Marco Antonio Montero Chavarrí­a Carné: A94000\\
+  \and
+  Francisco Molina Carné: B14194\\  
+}
+\maketitle
+
+\section{Investigación Previa}
+Un sistema de semáforos inteligente se compone de 2 partes, un semáforo para el paso de carros que normalmente tiene 3 luces disponibles, rojo para evitar el paso,
+amarillo para indicar a los conductores que disminuyan la velocidad ya que el semáforo está a punto de cambiar a rojo y verde para indicar paso a los conductores.  Y un segundo semáforo que esta destinado para los peatones, este posee dos luces, una roja que indica a los peatones que no deben cruzar la calle y el verde que indica que pueden transitar. Cabe destacar que en el caso de los cambios de verde a amarillo  para el semáforo de automóviles y el de verde a rojo para el peatonal, se debe poner luz intermitente para avisar que pronto se acabará el tiempo de paso.\\[0.3 cm]
+
+La idea es disponer de un botón de paso en el semáforo peatonal que al ser presionado, después de un tiempo cambie el estado del semáforo de automóviles a un estado de no paso y el semáforo peatonal a un estado de paso para los peatones. \\[0.3 cm]
+
+Este sistema se utiliza normalmente en la mayoría de cruces peatonales en el sistema vial. Naturalmente se pretende que si el botón de paso no es presionado el semáforo de automóviles no cambia de estado ya que será innecesario. \\[0.3 cm]
+
+Para este trabajo se tiene un semáforo de carros un poco más simple con solo 2 luces al igual que el peatonal, por lo que es posible recrear la mecánica de un semáforo inteligente utilizando las luces disponibles en el microcontrolador stm32f4.
+
+
+\section{Solución Propuesta}
+Utilizando los códigos de ejemplos del stm32f4 tanto de libopen como de open-coroco, se obtendrán las herramientas necesarias para el código del semáforo inteligente. Para ello es de interés revisar el manejo de leds, de temporizadores y de operación de botones.
+
+\section{Procedimiento}
+
+Con el esquema de funcionamiento propuesto en la figura \ref{tiempos} y los ejemplos de código se procederá a elaborar el código paso a paso, atacando el proyecto desde funciones simples hasta lograr el proyecto en su totalidad. 
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=12 cm]{tiempo1.png}
+\caption{Diagrama de tiempos}
+\label{tiempos}
+\end{figure}
+
+Desde esta perspectiva, primero se procederá a probar el funcionamiento de los LEDs con el programa Miniblink, posteriormente se hará uso de los botones para activar un LED o un programa. Por último se implementarán los temporizadores para lograr sincronizar los estados y que todo se ejecute como es debido. \cite{coroco} \cite{libopen} 
+
+\newpage
+
+
+\section{Observaciones y recomendaciones}
+
+\begin{itemize}
+\item Siempre verificar que la tarjeta responde correctamente con un programa de prueba.
+\item Entender el esquema y realizar la máquina de estados previamente para que se facilite la programación
+\end{itemize}
+
+
+
+\bibliographystyle{alpha} 
+\bibliography{refs}
+
+
+
+
+\end{document}
