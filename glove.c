@@ -17,7 +17,7 @@
  */
 //pwm-related timer configuration
 #define SYSFREQ                              168000000 //168MHz
-#define PWMFREQ                                  30000//58000 //32000
+#define PWMFREQ                                  2000//58000 //32000
 #define PWMFREQ_F                  ((float )(PWMFREQ)) //32000.0f
 #define PWMFREQ_CENTER_ALIGNED_F   (PWMFREQ_F/2.0f)            
 
@@ -230,8 +230,15 @@ void tim1_up_tim10_isr(void)
   //Clear the update interrupt flag
   timer_clear_flag(TIM1,TIM_SR_UIF);
 	
-	gpio_toggle(GPIOD,GPIO12);
 	
+	
+static int counter = 0;
+counter +=1 ;
+if(counter >=1000)
+{
+gpio_toggle(GPIOD,GPIO12);
+counter=0;
+}
 	/*int button = 0;
 	
 	button = gpio_get(GPIOA,GPIO0);
