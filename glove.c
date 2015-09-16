@@ -230,70 +230,103 @@ void tim1_up_tim10_isr(void)
   //Clear the update interrupt flag
   timer_clear_flag(TIM1,TIM_SR_UIF);
 	
-	
-	
+
 static int counter = 0;
+static int counter1 = 0;
+static int counter2 = 0;
 counter +=1 ;
-if(counter >=1000)
+counter1 +=1 ;
+counter2 +=1 ;
+int button;
+button = gpio_get(GPIOA,GPIO0);
+static int bandera=0;
+static int banderaseg=0;
+if(button == 0)
 {
-gpio_toggle(GPIOD,GPIO12);
+	
+		if(bandera == 0)//Revise si llego el boton
+		{
+			gpio_set(GPIOD,GPIO12);//Vehic Verde
+			gpio_set(GPIOD,GPIO13);//Peatonal Rojo
+			gpio_clear(GPIOD,GPIO15);//Peatonal Verde
+			gpio_clear(GPIOD,GPIO14);//Vehic Rojo
+		}
+		else if(banderaseg == 1)//Revise si llego el boton y pasaron 10 segs en counter2
+		{	
+				if(counter >=3000)// 3 segs, parpadee
+				{
+					if(counter >=4000)// 1 segs, ponga en rojo vehic
+					{
+						if(counter >=14000)// 10 segs, ponga en verde peat
+						{
+							if(counter >=17000)// 3 segs, parpadee
+							{
+								if(counter >=18000)// 1 segs, ponga en rojo peat y salga
+								{		// Cuando sale pone en verde vehic de nuevo
+								bandera=0;
+								banderaseg=0;
+								counter2=0;
+								}
+								else{
+									gpio_set(GPIOD,GPIO14);
+									gpio_set(GPIOD,GPIO13);
+									gpio_clear(GPIOD,GPIO12);
+									gpio_clear(GPIOD,GPIO15);
+								}
+							}
+							else{
+								if(counter1 >=500)
+								{
+								gpio_toggle(GPIOD,GPIO14);		
+								gpio_toggle(GPIOD,GPIO15);
+								counter1=0;
+								}	
+							}
+						}
+						else{
+							gpio_set(GPIOD,GPIO15);
+							gpio_set(GPIOD,GPIO14);
+							gpio_clear(GPIOD,GPIO12);
+							gpio_clear(GPIOD,GPIO13);
+						}
+					}
+					else{
+						gpio_set(GPIOD,GPIO14);
+						gpio_set(GPIOD,GPIO13);
+						gpio_clear(GPIOD,GPIO12);
+						gpio_clear(GPIOD,GPIO15);
+					}
+				}
+				else{
+					if(counter1 >=500)
+					{
+					gpio_toggle(GPIOD,GPIO12);		
+					gpio_toggle(GPIOD,GPIO13);
+					counter1=0;
+					}
+				}
+		}
+		else if( counter2>=10000)
+		{
+			banderaseg=1;
+			counter= 0;
+		}
+	
+}
+else
+{
+bandera=1;
 counter=0;
 }
-	/*int button = 0;
+
+
+
+
+
+
 	
-	button = gpio_get(GPIOA,GPIO0);
-
-	if(button > 0)
-	{
-	gpio_set(GPIOD,GPIO12);
-	gpio_clear(GPIOD,GPIO13);
-	gpio_set(GPIOD,GPIO14);
-	gpio_clear(GPIOD,GPIO15);
-	}
-	else
-	{
-	gpio_clear(GPIOD,GPIO12);
-	gpio_clear(GPIOD,GPIO13);
-	gpio_clear(GPIOD,GPIO14);
-	gpio_clear(GPIOD,GPIO15);
-	*/
+	
   }
-
-/*
-void adc_init (void)
-{
-  rcc_peripheral_enable_clock(&RCC_APB2ENR, RCC_APB2ENR_ADC1EN);
-  rcc_peripheral_enable_clock(&RCC_AHB1ENR, RCC_AHB1ENR_IOPAEN);
-  rcc_peripheral_enable_clock(&RCC_AHB1ENR, RCC_AHB1ENR_IOPCEN);
-
-
-
-  gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO1);	//PA1   joint_1
-  gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO2);	//PA2   joint_2
-  gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3);	//PA3   joint_3
-  gpio_mode_setup(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO1);	//PC1   joint_4
-  gpio_mode_setup(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO2);	//PC2   joint_5
-  gpio_mode_setup(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO5);	//PC5   joint_6
-
-  adc_set_clk_prescale(ADC_CCR_ADCPRE_BY2);
-  adc_disable_scan_mode(ADC1);
-  adc_set_single_conversion_mode(ADC1);
-
-  adc_set_sample_time(ADC1, ADC_CHANNEL1, ADC_SMPR_SMP_3CYC);   //joint_1
-  adc_set_sample_time(ADC1, ADC_CHANNEL2, ADC_SMPR_SMP_3CYC);   //joint_2
-  adc_set_sample_time(ADC1, ADC_CHANNEL3, ADC_SMPR_SMP_3CYC);   //joint_3
-  adc_set_sample_time(ADC1, ADC_CHANNEL11, ADC_SMPR_SMP_3CYC);  //joint_4
-  adc_set_sample_time(ADC1, ADC_CHANNEL12, ADC_SMPR_SMP_3CYC);  //joint_5
-  adc_set_sample_time(ADC1, ADC_CHANNEL15, ADC_SMPR_SMP_3CYC);  //joint_6
-
-  adc_set_multi_mode(ADC_CCR_MULTI_INDEPENDENT);
-  adc_power_on(ADC1);
-
-  //nvic_enable_irq(NVIC_ADC_IRQ);
-  //adc_enable_eoc_interrupt(ADC1);
-  //adc_disable_eoc_interrupt(ADC1);
-}
-*/
 
 void system_init(void) 
 {
