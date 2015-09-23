@@ -9,10 +9,9 @@ def puertis(port):
         if ch=='\r' or ch=='':
             return rv
 
-port = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=0)
+	port = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=0)
 
-while True:
-    port.write("\r\nDiga algo:")
-    rcv = readlineCR(port)
-    port.write("\r\nMe llega:" + repr(rcv))
+	print(port.read())
+	
+	
 
