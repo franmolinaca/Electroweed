@@ -2,16 +2,10 @@ import serial
 import time
 
 def puertis(port):
-    rv = ""
+    port = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=0)
     while True:
-        ch = port.read()
-        rv += ch
-        if ch=='\r' or ch=='':
-            return rv
-
-	port = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=0)
-
 	print(port.read())
-	
-	
+	time.sleep(1)
+        while ser.inWaiting() > 0:
+            out += ser.read(1)
 
