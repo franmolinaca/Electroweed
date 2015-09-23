@@ -1,0 +1,32 @@
+\begin{thebibliography}{Hun}
+
+\bibitem[Arc]{coroco}
+Arcoslab.
+\newblock https://github.com/arcoslab/open-coroco.
+
+\bibitem[Csv]{csv}
+Csv.
+\newblock https://docs.python.org/3/library/csv.html.
+
+\bibitem[Hun]{matplot}
+John Hunter.
+\newblock http://matplotlib.org/.
+
+\bibitem[Ope]{acmwiki}
+OpenMoko.
+\newblock http://wiki.openmoko.org/wiki/cdc\_acm.
+
+\bibitem[PyS]{pyserial}
+PySerial.
+\newblock https://pyserial.readthedocs.org/.
+
+\bibitem[ST]{adcref}
+ST.
+\newblock
+  http://www.st.com/web/en/resource/technical/document/application\_note/cd00211314.pdf.
+
+\bibitem[Wik]{wikicdc}
+Wikipedia.
+\newblock https://en.wikipedia.org/wiki/usb\_communications\_device\_class.
+
+\end{thebibliography}

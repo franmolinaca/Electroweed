@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  23 SEP 2015 11:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  23 SEP 2015 10:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**proyecto2.tex
-(./proyecto2.tex
+**anteproyecto3.tex
+(./anteproyecto3.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
@@ -24,13 +24,6 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
-))
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2014/04/30 v1.2b Input encoding file
 \inpenc@prehook=\toks14
@@ -298,65 +291,40 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count90
-\lst@gtempboxa=\box26
-\lst@token=\toks18
-\lst@length=\count91
-\lst@currlwidth=\dimen106
-\lst@column=\count92
-\lst@pos=\count93
-\lst@lostspace=\dimen107
-\lst@width=\dimen108
-\lst@newlines=\count94
-\lst@lineno=\count95
-\lst@maxwidth=\dimen109
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
-\c@lstnumber=\count96
-\lst@skipnumbers=\count97
-\lst@framebox=\box27
+(./anteproyecto3.aux
+LaTeX Info: Redefining \. on input line 6.
+LaTeX Info: Redefining \% on input line 6.
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2014/03/04 1.5c listings configuration
-))
-Package: listings 2014/03/04 1.5c (Carsten Heinz)
+\openout1 = `anteproyecto3.aux'.
 
-(./proyecto2.aux
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
 LaTeX Info: Redefining \. on input line 7.
 LaTeX Info: Redefining \% on input line 7.
-)
-\openout1 = `proyecto2.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Info: Redefining \. on input line 15.
-LaTeX Info: Redefining \% on input line 15.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count98
-\scratchdimen=\dimen110
-\scratchbox=\box28
-\nofMPsegments=\count99
-\nofMParguments=\count100
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count101
-\MPscratchDim=\dimen111
-\MPnumerator=\count102
-\makeMPintoPDFobject=\count103
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count90
+\scratchdimen=\dimen106
+\scratchbox=\box26
+\nofMPsegments=\count91
+\nofMParguments=\count92
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count93
+\MPscratchDim=\dimen107
+\MPnumerator=\count94
+\makeMPintoPDFobject=\count95
+\everyMPtoPDFconversion=\toks19
 ) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -405,71 +373,80 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count104
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 16.
+(Font)              <12> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 16.
+(Font)              <8> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 16.
+(Font)              <6> on input line 15.
 
-Underfull \hbox (badness 10000) in paragraph at lines 18--19
+<circ1.png, id=1, 393.47pt x 187.70125pt>
+File: circ1.png Graphic file (type png)
+ <use circ1.png>
+Package pdftex.def Info: circ1.png used on input line 21.
+(pdftex.def)             Requested size: 341.43306pt x 162.87488pt.
+ [1
 
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./circ1
+.png>]
+
+LaTeX Warning: Reference `adc' on page 2 undefined on input line 28.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 37.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 37.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 37.
+ [2]
+<flowdiag.png, id=19, 588.1975pt x 483.8075pt>
+File: flowdiag.png Graphic file (type png)
+ <use flowdiag.png>
+Package pdftex.def Info: flowdiag.png used on input line 48.
+(pdftex.def)             Requested size: 284.52756pt x 234.03362pt.
+ [3 <./flowdiag.png>] (./anteproyecto3.bbl
+Overfull \hbox (106.38982pt too wide) in paragraph at lines 24--27
+[]\OT1/cmr/m/n/10 ST.  http://www.st.com/web/en/resource/technical/document/app
+lication[]note/cd00211314.pdf. 
  []
 
-<tiempo1.png, id=1, 1146.2825pt x 437.635pt>
-File: tiempo1.png Graphic file (type png)
- <use tiempo1.png>
-Package pdftex.def Info: tiempo1.png used on input line 31.
-(pdftex.def)             Requested size: 312.9803pt x 119.4919pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--38
-
+Overfull \hbox (14.83965pt too wide) in paragraph at lines 29--31
+[]\OT1/cmr/m/n/10 Wikipedia.  https://en.wikipedia.org/wiki/usb[]communications
+[]device[]class. 
  []
 
-[1
+) [4] (./anteproyecto3.aux
+LaTeX Info: Redefining \. on input line 6.
+LaTeX Info: Redefining \% on input line 6.
+)
 
-{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 42--44
+LaTeX Warning: There were undefined references.
 
- []
-
-[2 <./tiempo1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 47--49
-
- []
-
-<fotillo.png, id=16, 3276.24pt x 2457.18pt>
-File: fotillo.png Graphic file (type png)
- <use fotillo.png>
-Package pdftex.def Info: fotillo.png used on input line 52.
-(pdftex.def)             Requested size: 341.43306pt x 256.0431pt.
- [3 <./fotillo.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
-
- []
-
-(./proyecto2.bbl) [4] (./proyecto2.aux
-LaTeX Info: Redefining \. on input line 7.
-LaTeX Info: Redefining \% on input line 7.
-) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 4052 strings out of 493117
- 54266 string characters out of 6135433
- 121487 words of memory out of 5000000
- 7474 multiletter control sequences out of 15000+600000
- 10214 words of font info for 28 fonts, out of 8000000 for 9000
+ 2536 strings out of 493117
+ 34169 string characters out of 6135433
+ 100301 words of memory out of 5000000
+ 5974 multiletter control sequences out of 15000+600000
+ 7895 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,32p,686b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
-}</usr/local/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on proyecto2.pdf (4 pages, 1954993 bytes).
+ 37i,7n,30p,544b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
+local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on anteproyecto3.pdf (4 pages, 161818 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 50 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

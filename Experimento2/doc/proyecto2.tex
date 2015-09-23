@@ -14,147 +14,52 @@ Francisco Molina, Carné: B14194\\
 
 \begin{document}
 \maketitle
-\section{Problema}
- Desarrollar un "semáforo inteligente" simplificado utlizando los leds, la botonera, y los temporizadores del microcontrolador STM32F4, de los cuatro leds disponibles en el microcontrolador, los leds LD3 y LD5 representarán el semáforo vehicular, mientras que los LD4 y LD6 serían el semáforo peatonal. El botón B1 (user\_button) sería el puerto con el que el usuario solicitará la activación de las luces peatonales.
+\section{Cambios en la solución propuesta}
+Se desarrolló un "semáforo inteligente" simplificado utilizando los leds, la botonera, y los temporizadores del microcontrolador STM32F4. De los cuatro leds disponibles en el microcontrolador, los leds LD3 y LD5 representarán el semáforo vehicular, mientras que los LD4 y LD6 serían el semáforo peatonal. El botón B1 (user\_button) sería el puerto con el que el usuario solicitará la activación de las luces peatonales. \\[0.5cm]
+
 La asignación de funcionalidades de los leds es la siguiente:
 
 \begin{itemize}
-\item LD3: paso de vehículos.
-\item LD5: vehículos detenidos.
-\item LD4: paso de peatones.
-\item LD6: peatones deternidos
+\item GPIO12 //Vehiculo Verde
+\item GPIO13 //Peatonal Rojo
+\item GPIO15 //Peatonal Verde
+\item GPIO14 //Vehiculo Rojo
 \end{itemize}
 
-Se elaboró la máquina de estados de acuerdo con el diagrama de la figura \ref{semaf}, de forma que  el botón se puede presionar inclusive antes que se acaben los 10s  del funcionamiento de LD3, pero deberá permanecer encendido hasta que terminen los 10s. Si no se presiona el botón LD3 debería permancer encendido indefinidamente. 
-La temporización de los leds se debe realizar utilizando uno de los temporizadores del microcontrolador.
-Se recomienda utilizar el Advanced Timer 1 con interrupciones de tiempo habilitados.
-Como innovación se podrían agregar leds externos para representar adecuadamente con colores verde y rojo ambos semáforos, o agregar una luz amarilla externa con su respectivo control adicional. En cualquiera de los se deberían utilizar resistencias de pull-up para los leds alimentados por el mismo micro-controlador para garantizar la seguridad de la tarjeta.
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=11 cm]{tiempo1.png}
+\caption{Diagrama de tiempos}
+\label{semaf}
+\end{figure}
 
-\section{Solución Propuesta}
+Se elaboró la máquina de estados de acuerdo con el diagrama de la figura \ref{semaf}, de forma que  el botón se puede presionar inclusive antes que se acaben los 10s  del funcionamiento de LD3, pero deberá permanecer encendido hasta que terminen los 10s. Si no se presiona el botón LD3 debería permanecer encendido indefinidamente. 
+La temporización de los leds se realizó utilizando el advanced timer 1 con interrupciones de tiempo habilitados, uno de los temporizadores del microcontrolador. Para esto se utilizó el archivo glove.c en la carpeta scr\_glove de opencoroco que fue modificado en el proyecto 1.\cite{coroco}  \\[0.5cm]
 
-Crear un código en C que sea capaz de cumplir los requisitos del proyecto y que una vez cargado en el stm32f4, el mismo simule el comportamiento del semáforo. Se utilizará además el código creado en el primer proyecto y a partir del mismo, se agregerá lo necesario para llegar un código final acorde al problema.
+Como innovación se agregaron leds externos para representar adecuadamente con colores verde y rojo ambos semáforos, o agregar una luz amarilla externa con su respectivo control adicional. Se agregaron al circuito resistencias de pull-up para los leds alimentados por el mismo micro-controlador para garantizar la seguridad de la tarjeta. En el link: https://youtu.be/X7pJ6M0UVCE se puede ver el funcionamiento del semáforo en sus diferentes estados.
 
-\section{Procedimiento}
-Se utilizó el archivo glove.c en la carpeta scr\_glove de opencoroco que fue modificado en el proyecto 1. //
-Sobre el código existente se realizaron los siguientes cambios en el método del temporizador:
+\section{Justificación de resultados}
+Adjunto se encuentra el archivo con el código fuente de donde se toman las justificaciones. En el primer paso del video vemos como al iniciar el semáforo vehicular se encuentra en verde y el peatonal en rojo, se esperan 10 segundos antes de estripar el botón y por eso justo al estriparlo se ponen las luces en intermitente y se hace el cambio para dejar el peatonal en verde y el vehicular en rojo. Se deja un tiempo para el paso de peatones, se ponen de nuevo las luces en intermitente y se vuelve al estado inicial..\\[0.5cm]
+En el segundo caso, la señal de paso del peatonal llega antes de que pasen los 10 segundos, sin embargo el semáforo al igual que en el diagrama no cambia de estado hasta que haya pasado el tiempo mínimo, con lo que se comprueba el correcto funcionamiento del mismo.\\[0.5cm]
+ 
+\newpage
 
-\begin{lstlisting}
-void tim1_up_tim10_isr(void) 
-{
-  //Clear the update interrupt flag
-  timer_clear_flag(TIM1,TIM_SR_UIF);
-	
+Como jutificación de ello,  los estados se definieron por medio de if's anidados, que permiten permiten incluir los retardos de tiempo necesarios entre cada una de las funciones del semáforo, como lo son el temporizador de 10 seg previo al contacto del botón para pedir paso peatonal. Este temporizador espera 10 segundos y se limpia cada vez que hay un contacto en el botón. Si el bóton llega antes de que se cumplan los 10 seg, el método funciona de tal manera que el cambio de luces se realiza hasta que se cumplan esos 10 seg mínimos.\\[0.5cm]
+Además se pone una mecánica de parpadeo a los leds para indicar que van a cambiar de estado, esto se logra mediante los if's que poseen un contador interno con los métodos toggle dentro de sus llaves.\\[0.5cm]
 
-static int counter = 0;
-static int counter1 = 0;
-static int counter2 = 0;
-counter +=1 ;
-counter1 +=1 ;
-counter2 +=1 ;
-int button;
-button = gpio_get(GPIOA,GPIO0);
-static int bandera=0;
-static int banderaseg=0;
-if(button == 0)
-{
-	
-		if(bandera == 0)//Revise si llego el boton
-		{
-			gpio_set(GPIOD,GPIO12);//Vehic Verde
-			gpio_set(GPIOD,GPIO13);//Peatonal Rojo
-			gpio_clear(GPIOD,GPIO15);//Peatonal Verde
-			gpio_clear(GPIOD,GPIO14);//Vehic Rojo
-		}
-		else if(banderaseg == 1)//Revise si llego el boton y pasaron 10 segs en counter2
-		{	
-				if(counter >=3000)// 3 segs, parpadee
-				{
-					if(counter >=4000)// 1 segs, ponga en rojo vehic
-					{
-						if(counter >=14000)// 10 segs, ponga en verde peat
-						{
-							if(counter >=17000)// 3 segs, parpadee
-							{
-								if(counter >=18000)// 1 segs, ponga en rojo peat y salga
-								{		// Cuando sale pone en verde vehic de nuevo
-								bandera=0;
-								banderaseg=0;
-								counter2=0;
-								}
-								else{
-									gpio_set(GPIOD,GPIO14);
-									gpio_set(GPIOD,GPIO13);
-									gpio_clear(GPIOD,GPIO12);
-									gpio_clear(GPIOD,GPIO15);
-								}
-							}
-							else{
-								if(counter1 >=500)
-								{
-								gpio_toggle(GPIOD,GPIO14);		
-								gpio_toggle(GPIOD,GPIO15);
-								counter1=0;
-								}	
-							}
-						}
-						else{
-							gpio_set(GPIOD,GPIO15);
-							gpio_set(GPIOD,GPIO14);
-							gpio_clear(GPIOD,GPIO12);
-							gpio_clear(GPIOD,GPIO13);
-						}
-					}
-					else{
-						gpio_set(GPIOD,GPIO14);
-						gpio_set(GPIOD,GPIO13);
-						gpio_clear(GPIOD,GPIO12);
-						gpio_clear(GPIOD,GPIO15);
-					}
-				}
-				else{
-					if(counter1 >=500)
-					{
-					gpio_toggle(GPIOD,GPIO12);		
-					gpio_toggle(GPIOD,GPIO13);
-					counter1=0;
-					}
-				}
-		}
-		else if( counter2>=10000)
-		{
-			banderaseg=1;
-			counter= 0;
-		}
-	
-}
-else
-{
-bandera=1;
-counter=0;
-}	
-}
-\end{lstlisting}
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=12 cm]{fotillo.png}
+\caption{Fotografía del sistema}
+\label{foto}
+\end{figure}
 
-Esta definición añadida permite además de cumplir con los tiempos requeridos por el problema, encender los leds de acorde a los mismos. Los leds se definieron de la siguiente manera:
-\begin{lstlisting}
-GPIO12 //Vehiculo Verde
-GPIO13 //Peatonal Rojo
-GPIO15 //Peatonal Verde
-GPIO14 //Vehiculo Rojo
-\end{lstlisting}
+\newpage
+\section{Conclusiones y recomendaciones}
 
-Los if's anidados permiten incluir los retardos de tiempo necesarios entre cada una de las funciones del semáforo, como lo son el temporizador de 10 seg previo al contacto del botón para pedir paso peatonal. Este temporizador espera 10 segundos y se limpia cada vez que hay un contacto en el botón. Si el bóton llega antes de que se cumplan los 10 seg, el método funciona de tal manera que el cambio de luces se realiza hasta que se cumplan esos 10 seg mínimos.//
-Además se pone una mecánica de parpadeo a los leds para indicar que van a cambiar de estado, esto se logra mediante los if's que poseen un contador interno con los métodos toggle dentro de sus llaves.//
-Como innovación se realizó un circuito en una protoboard que se conectara a los pines definidos para los leds y así ver el circuito funcionando de una manera más agradable.//
-En este ambito se podría trabajar aún más, quizas añadir un tercer led para el semáforo de vehículos que sea de color amarillo.
+El proyecto a pesar de tener sus dificultades iniciales, sirvió como introducción a la utilización del microcontrolador, así como la visualización de la forma en que se utilizan estos sistemas para diferentes tipos de proyectos. La elaboración e implementación de una máquina de estados, permitió una asimilación de materia vista en cursdos anteriores y la realización reflejó diferentes conceptos en un proyecto más palpable que la teoría. Cabe destacar que el proyecto deja una base sólida para futuros proyectos en especial el uso de temporizadores, ya que son extremadamente útiles para definir comportamientos reales con retardos. \\[0.5cm]
 
-%%% añadir imagenes pancho
-%%%% <3 <3
-\section{Conclusiones}
-
-El proyecto a pesar de tener sus dificultades iniciales, se logró con exito. Más aún se pudo hacer una implementación en una protoboard de la cual se obtiene una grabación que será añadida a la carpeta del problema o se brindará un link para el video para que el lector pueda observarlo.//
-
-Cabe destacar que el proyecto deja una base sólida para futuros proyectos en especial el uso de temporizadores, ya que son extremadamente útiles para definir comportamientos reales con retardos. 
+Como recomendaciones para futuros trabajos, se podría trabajar la complejidad aún más, quizas añadir un tercer led para el semáforo de vehículos que sea de color amarillo. Adicionalmente se puede estructurar de mejor forma el código y probar diferentes formas de lógica a la hora de realizar los condicionales. 
 
 
 
