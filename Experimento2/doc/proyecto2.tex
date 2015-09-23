@@ -1,43 +1,42 @@
 \documentclass[letterpaper]{article}
 \usepackage[T1]{fontenc}
-%\usepackage[utf8]{inputenc}
-\usepackage[ansinew]{inputenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[ansinew]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage{listings}
-\title{Proyecto 2\\ Laboratorio de Microcontroladores Temporizador y GPIOs Parte 2 creaciÛn sem·foro}
+\title{Proyecto 2\\ Laboratorio de Microcontroladores Temporizador y GPIOs }
 \author{
-Marco Antonio Montero ChavarrÌ≠a CarnÈ: A94000\\
+Marco Antonio Montero Chavarr√≠a, Carn√©: A94000\\
  \and
-Francisco Molina CarnÈ: B14194\\
+Francisco Molina, Carn√©: B14194\\
 }
 
 \begin{document}
 \maketitle
 \section{Problema}
- Desarrollar un "sem·foro inteligente" simplificado utlizando los leds, la botonera, y los temporizadores del microcontrolador STM32F4,e los cuatro leds disponibles en el microcontrolador los leds LD3 y LD5 representar·n el sem·foro vehicular, mientras que los LD4 y LD6 serÌan el sem·foro peatonal. El botÛn B1 (user\_button) serÌa el puerto con el que el usuario solicitar· la activaciÛn de las luces peatonales.
-La asignaciÛn de funcionalidades de los leds es la siguiente:
+ Desarrollar un "sem√°foro inteligente" simplificado utlizando los leds, la botonera, y los temporizadores del microcontrolador STM32F4, de los cuatro leds disponibles en el microcontrolador, los leds LD3 y LD5 representar√°n el sem√°foro vehicular, mientras que los LD4 y LD6 ser√≠an el sem√°foro peatonal. El bot√≥n B1 (user\_button) ser√≠a el puerto con el que el usuario solicitar√° la activaci√≥n de las luces peatonales.
+La asignaci√≥n de funcionalidades de los leds es la siguiente:
 
 \begin{itemize}
-\item LD3:paso de vehÌculos.
-\item LD5:vehÌculos detenidos.
-\item LD4:paso de peatones.
-\item LD6:peatones deternidos
+\item LD3: paso de veh√≠culos.
+\item LD5: veh√≠culos detenidos.
+\item LD4: paso de peatones.
+\item LD6: peatones deternidos
 \end{itemize}
 
- El botÛn se puede presionar inclusive antes que se acaben los 10s  del funcionamiento de LD3, pero deberÌa permanecer encendido hasta que terminen los 10s. Si no se presiona el botÛn LD3 deberÌa permancer
-encendido indefinidamente.
-La temporizaciÛn de los leds se debe realizar utilizando uno de los temporizadores del microcontrolador.
+Se elabor√≥ la m√°quina de estados de acuerdo con el diagrama de la figura \ref{semaf}, de forma que  el bot√≥n se puede presionar inclusive antes que se acaben los 10s  del funcionamiento de LD3, pero deber√° permanecer encendido hasta que terminen los 10s. Si no se presiona el bot√≥n LD3 deber√≠a permancer encendido indefinidamente. 
+La temporizaci√≥n de los leds se debe realizar utilizando uno de los temporizadores del microcontrolador.
 Se recomienda utilizar el Advanced Timer 1 con interrupciones de tiempo habilitados.
-Como innovaciÛn se podrÌan agregar leds externos para representar adecuadamente con colores verde y rojo ambos sem·foros, o agregar una luz amarilla externa con su respectivo control adicional. En cualquiera de los se deberÌan utilizar resistencias de pull-up para los leds alimentados por el mismo micro-controlador para garantizar la seguridad de la tarjeta.
+Como innovaci√≥n se podr√≠an agregar leds externos para representar adecuadamente con colores verde y rojo ambos sem√°foros, o agregar una luz amarilla externa con su respectivo control adicional. En cualquiera de los se deber√≠an utilizar resistencias de pull-up para los leds alimentados por el mismo micro-controlador para garantizar la seguridad de la tarjeta.
 
-\section{SoluciÛn Propuesta}
+\section{Soluci√≥n Propuesta}
 
-Crear un cÛdigo en C que sea capaz de cumplir los requisitos del proyecto y que una vez cargado en el stm32f4, el mismo simule el comportamiento del sem·foro. Se utilizar· adem·s el cÛdigo creado en el primer proyecto y a partir del mismo, se agreger· lo necesario para llegar un cÛdigo final acorde al problema.
+Crear un c√≥digo en C que sea capaz de cumplir los requisitos del proyecto y que una vez cargado en el stm32f4, el mismo simule el comportamiento del sem√°foro. Se utilizar√° adem√°s el c√≥digo creado en el primer proyecto y a partir del mismo, se agreger√° lo necesario para llegar un c√≥digo final acorde al problema.
 
 \section{Procedimiento}
-Se utilizÛ el archivo glove.c en la carpeta scr\_glove de opencoroco que fue modificado en el proyecto 1. //
-Sobre el cÛdigo existente se realizaron los siguientes cambios en el mÈtodo del temporizador:
+Se utiliz√≥ el archivo glove.c en la carpeta scr\_glove de opencoroco que fue modificado en el proyecto 1. //
+Sobre el c√≥digo existente se realizaron los siguientes cambios en el m√©todo del temporizador:
 
 \begin{lstlisting}
 void tim1_up_tim10_isr(void) 
@@ -136,7 +135,7 @@ counter=0;
 }
 \end{lstlisting}
 
-Esta definiciÛn aÒadida permite adem·s de cumplir con los tiempos requeridos por el problema, encender los leds de acorde a los mismos. Los leds se definieron de la siguiente manera:
+Esta definici√≥n a√±adida permite adem√°s de cumplir con los tiempos requeridos por el problema, encender los leds de acorde a los mismos. Los leds se definieron de la siguiente manera:
 \begin{lstlisting}
 GPIO12 //Vehiculo Verde
 GPIO13 //Peatonal Rojo
@@ -144,18 +143,18 @@ GPIO15 //Peatonal Verde
 GPIO14 //Vehiculo Rojo
 \end{lstlisting}
 
-Los if's anidados permiten incluir los retardos de tiempo necesarios entre cada una de las funciones del sem·foro, como lo son el temporizador de 10 seg previo al contacto del botÛn para pedir paso peatonal. Este temporizador espera 10 segundos y se limpia cada vez que hay un contacto en el botÛn. Si el bÛton llega antes de que se cumplan los 10 seg, el mÈtodo funciona de tal manera que el cambio de luces se realiza hasta que se cumplan esos 10 seg mÌnimos.//
-Adem·s se pone una mec·nica de parpadeo a los leds para indicar que van a cambiar de estado, esto se logra mediante los if's que poseen un contador interno con los mÈtodos toggle dentro de sus llaves.//
-Como innovaciÛn se realizÛ un circuito en una protoboard que se conectara a los pines definidos para los leds y asÌ ver el circuito funcionando de una manera m·s agradable.//
-En este ambito se podrÌa trabajar a˙n m·s, quizas aÒadir un tercer led para el sem·foro de vehÌculos que sea de color amarillo.
+Los if's anidados permiten incluir los retardos de tiempo necesarios entre cada una de las funciones del sem√°foro, como lo son el temporizador de 10 seg previo al contacto del bot√≥n para pedir paso peatonal. Este temporizador espera 10 segundos y se limpia cada vez que hay un contacto en el bot√≥n. Si el b√≥ton llega antes de que se cumplan los 10 seg, el m√©todo funciona de tal manera que el cambio de luces se realiza hasta que se cumplan esos 10 seg m√≠nimos.//
+Adem√°s se pone una mec√°nica de parpadeo a los leds para indicar que van a cambiar de estado, esto se logra mediante los if's que poseen un contador interno con los m√©todos toggle dentro de sus llaves.//
+Como innovaci√≥n se realiz√≥ un circuito en una protoboard que se conectara a los pines definidos para los leds y as√≠ ver el circuito funcionando de una manera m√°s agradable.//
+En este ambito se podr√≠a trabajar a√∫n m√°s, quizas a√±adir un tercer led para el sem√°foro de veh√≠culos que sea de color amarillo.
 
-%%% aÒadir imagenes pancho
+%%% a√±adir imagenes pancho
 %%%% <3 <3
 \section{Conclusiones}
 
-El proyecto a pesar de tener sus dificultades iniciales, se logrÛ con exito. M·s a˙n se pudo hacer una implementaciÛn en una protoboard de la cual se obtiene una grabaciÛn que ser· aÒadida a la carpeta del problema o se brindar· un link para el video para que el lector pueda observarlo.//
+El proyecto a pesar de tener sus dificultades iniciales, se logr√≥ con exito. M√°s a√∫n se pudo hacer una implementaci√≥n en una protoboard de la cual se obtiene una grabaci√≥n que ser√° a√±adida a la carpeta del problema o se brindar√° un link para el video para que el lector pueda observarlo.//
 
-Cabe destacar que el proyecto deja una base sÛlida para futuros proyectos en especial el uso de temporizadores, ya que son extremadamente ˙tiles para definir comportamientos reales con retardos. 
+Cabe destacar que el proyecto deja una base s√≥lida para futuros proyectos en especial el uso de temporizadores, ya que son extremadamente √∫tiles para definir comportamientos reales con retardos. 
 
 
 

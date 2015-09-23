@@ -241,10 +241,10 @@ int button;
 button = gpio_get(GPIOA,GPIO0);
 static int bandera=0;
 static int banderaseg=0;
-if(button == 0)
+if(button == 0)//Revise si llego el boton
 {
 	
-		if(bandera == 0)//Revise si llego el boton
+		if(bandera == 0)//Si no ha llegado botonazo
 		{
 			gpio_set(GPIOD,GPIO12);//Vehic Verde
 			gpio_set(GPIOD,GPIO13);//Peatonal Rojo
@@ -261,20 +261,20 @@ if(button == 0)
 						{
 							if(counter >=17000)// 3 segs, parpadee
 							{
-								if(counter >=18000)// 1 segs, ponga en rojo peat y salga
+								if(counter >=18000)// 1 segs, salga
 								{		// Cuando sale pone en verde vehic de nuevo
-								bandera=0;
-								banderaseg=0;
-								counter2=0;
+								bandera=0; // vuelva la bandera a 0 para volver a aceptar botonazos
+								banderaseg=0;// vuelve banderaseg para saber que no han pasado 10 segs
+								counter2=0; // resetea el contador de los 10 segs
 								}
-								else{
+								else{// ponga en rojo peatonal
 									gpio_set(GPIOD,GPIO14);
 									gpio_set(GPIOD,GPIO13);
 									gpio_clear(GPIOD,GPIO12);
 									gpio_clear(GPIOD,GPIO15);
 								}
 							}
-							else{
+							else{// 3 segs, parpadee
 								if(counter1 >=500)
 								{
 								gpio_toggle(GPIOD,GPIO14);		
@@ -283,21 +283,21 @@ if(button == 0)
 								}	
 							}
 						}
-						else{
+						else{// 10 segs, ponga en verde peat
 							gpio_set(GPIOD,GPIO15);
 							gpio_set(GPIOD,GPIO14);
 							gpio_clear(GPIOD,GPIO12);
 							gpio_clear(GPIOD,GPIO13);
 						}
 					}
-					else{
+					else{// 1 segs, ponga en rojo vehic
 						gpio_set(GPIOD,GPIO14);
 						gpio_set(GPIOD,GPIO13);
 						gpio_clear(GPIOD,GPIO12);
 						gpio_clear(GPIOD,GPIO15);
 					}
 				}
-				else{
+				else{// 3 segs, parpadee
 					if(counter1 >=500)
 					{
 					gpio_toggle(GPIOD,GPIO12);		
@@ -306,14 +306,14 @@ if(button == 0)
 					}
 				}
 		}
-		else if( counter2>=10000)
-		{
+		else if( counter2>=10000)//si pasaron 10 segs
+		{//Ponga bandera y resetee counter
 			banderaseg=1;
 			counter= 0;
 		}
 	
 }
-else
+else if(bandera==0)//Si llegó un botonazo y no esta en paso de peatones
 {
 bandera=1;
 counter=0;
