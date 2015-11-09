@@ -15,15 +15,69 @@
 \maketitle
 
 \section{Investigación Previa}
-
+En este proyecto final se desea crear un controlador para una motocicleta eléctrica, que sea capaz de cambiar la velocidad del motor
+de la motocicleta, que indique además la velocidad instantanea y por último que pueda encender y apagar el motor. Además
+poder usar el mismo controlador para controlar el sistema de luces de la motocicleta.\\
+Como una pequeña introducción una motocicleta o scooter eléctrica es una motocicleta que utiliza un motor eléctrico 
+como medio de propulsión.
+Al igual que el automóvil eléctrico no produce contaminación atmosférica ni contaminación sonora en el lugar de uso.
+Se han desarrollado algunos prototipos de pilas de combustible, siendo algunos ejemplos el ENV de Intelligent Energy, 
+el scooter de Honda que utiliza el Honda FC Stack, y el el Yamaha FC-AQEL.También se están en desarrollo prototipos de 
+motocicletas híbridas con motor de gasolina y motor eléctrico. Algunos ejemplos son el Ecycle, y el Yamaha Gen-RYU.
+No obstante, los modelos en producción son de baterías.
+\\
+El principal problema que se puede tener con este trabajo es el tipo de alimentación que se debe usar para el motor de la motocicleta
+ya que no se utilizan baterias DC usadas comúnmente en electrodomésticos o baterías AC como las de un automóvil sino baterias especiales DC 
+que no se descarguen con tanta facilidad, para poder manejar el consumo de corriente que pedirá el motor, 
+de lo contrario no se podrá aumentar velocidades con fácilidad o la motocicleta se apagaría constantenmente.
+Existen baterias en el mercado capaces de cumplir con las necesidades de un motor DC como el de una motocicleta eléctrica,se les 
+conoce como: "Baterías de ciclo profundo".
+\\
+Las baterías de ciclo profundo guardan energía de modo que las fuentes de la corriente  eléctrica  
+las  recarguen  por  medio  de  los alternadores,  paneles solares, molinos de viento, etc. 
+La diferencia fundamental entre estas baterías y las de ciclo corto como las de un automotor, 
+radica en el uso que uno hace de ellas. Para  explicarlo claramente veamos como es el caso de los automotores. Se 
+necesita  mucha  corriente  de  arranque  y que una batería pueda entregar esa energía en corto tiempo. 
+Entre 300 y 600 amper en unos 3 a 5 segundos. Luego la batería se recarga rápidamente y no hace falta siquiera que esté 
+presente. El alternador provee  de toda la energía necesaria para el funcionamiento del sistema eléctrico automotor. 
+Partiendo de una batería 100 porciento cargada, el consumo de energía que hemos hecho no supera el 5 porcierto. 
+De aquí que se trata de una batería de ciclo corto. En estas baterías se suele tomar varias veces la capacidad de la batería 
+en poco tiempo. Ejemplo, batería de 65 amperes se toma 300 a 600 amperes en 3 a 5 segundos. 
+En sistemas de iluminación, las cargas aplicadas a las baterías guardan cierta relación con su capacidad y además suelen 
+ser muy pequeñas al respecto de la  capacidad  de  la batería.  Se  toma energía  por debajo de  la  capacidad  de  la misma.  
+Ejemplo, batería de 65  amper, se toma 3 amper a lo largo de 10 horas. 
+Estas baterías son denominadas de ciclo profundo ya que admiten ser descargadas en un 90 porciento. 
 
 \section{Solución Propuesta}
+Aplicando lo visto a lo largo del curso en los 4 proyectos, tomar el microcontrolador STM32F4 y crear el sistema de control,
+para un motor más grande como el de una motocicleta y además tomar otras salidas de control para manejar señales de control, 
+como ignición, luces y herramientas de señalización como un velocímetro.
+Esto es lograble tomando en cuenta que en el laboratorio 4 se aprendió a controlar un motor DC pequeño, quedará extrapolar este 
+conocimiento a un motor más robusto y grande.
+El manejo de luces se puede hacer con cualquiera de los pines de salida vistos en el laboratorio 2 y la lógica que se debe añadir
+es poder obtener la velocidad del motor por medio del controlador para desplegarlo en pantalla. Más aún para el manejo de la 
+ignición se utilizará un sistema parecido al sistema de sensor táctil utilizado en el laboratorio 2, esto para enviar una señal
+"contacto" al microcontrolador y que el sepa que debe encender el motor.
 
 \section{Procedimiento}
-
+\begin{itemize}
+\item Comunicar el microcontrolador con un motor DC de ser posible tamaño apto para una motocicleta eléctrica sino uno semejante, como los
+usados en el arcoslab. Esto se logrará usando un código similar al laboratorio 4.
+\item Adaptar este código para que tome en cuenta una entrada de un sensor táctil o algún tipo de ignición similar a la de los carros.
+\item Mostrar en pantalla velocidad del motor. Esto por medio de un programa de comunicación similar al del laboratorio 2.
+\item Añadir cualidades físicas de una motocicleta de ser posible. Entre esto calza la posibilidad de tener una carcaza que dará soporte
+al motor,las baterias y un espacio para el microcontrolador y la ignición.
+\end{itemize}
 \section{Observaciones y recomendaciones}
+Recomendación leer la documentación del STM32F4 a fondo para determinar si es capaz de manejar las tensiones y las corrientes 
+requeridas por el motor a utilizar y así saber si es necesario utilizar circuitos de protección y/o algún otra configuración
+electrónica adicional.
 
 \bibliographystyle{alpha} 
+
+%estos son los links de donde salió casi todo panchis
+%http://www.cavadevices.com/archivos/FOLLETOS/BATERIAS%20CICLO%20PROFUNDO.pdf baterias de ciclo profundo
+% http://www.technologyreview.com/news/406928/making-electric-vehicles-practical/ moto eléctrica
 \bibliography{refs}
 
 
