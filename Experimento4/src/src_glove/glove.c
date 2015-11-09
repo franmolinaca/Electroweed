@@ -46,6 +46,8 @@
 
 //header
 #include "glove.h"
+#include "Print.h"
+#include "Print.c"
 
 //external libraries
 #include <stdio.h>
@@ -72,7 +74,7 @@ void system_init(void)
   adc_init();
   cdcacm_init();
   DTC_SVM_tim_init();
- //tim1_up_tim10_isr();
+  stdin_init();
   printled(4, LRED);
   
 }
@@ -345,6 +347,7 @@ void tim1_up_tim10_isr(void)
   //Clear the update interrupt flag
   timer_clear_flag(TIM1,TIM_SR_UIF);
 	
+
     float voltage_joint_0 = 0.0f;      
     //float voltage_joint_1 = 0.0f;
     //float voltage_joint_2 = 0.0f;
@@ -356,9 +359,39 @@ void tim1_up_tim10_isr(void)
 	static int counter = 0;
 	counter +=1 ;
 
-	if(counter >=2000)// Print frequency each n cycles
+	char strings1 [100];// creo que hay que inicializarlo
+	bool dato = receive_a_string(strings1);// y poner scanf para que parsee los valores que le entran antes del print
+	static float valor=1.5f;
+	static float valornuevo=1.5f;
+	static float diferencial = 0.0f;//diferencial es el theta min
+	static float velocidad = 20.0f;
+	if(dato){
+
+		
+		sscanf(strings1, "%f %f" , &valornuevo , &velocidad);
+		printf("%s \n",strings1); 
+
+	}
+		if(valor < valornuevo-0.01){
+	
+			diferencial = 	(valornuevo - valor)/ velocidad;
+			valor = valor + diferencial;
+
+		}
+		else if(valor>valornuevo+0.01){ 
+			diferencial = (valor-valornuevo)/velocidad;
+			valor = valor - diferencial;
+		}
+	SVM_voltage_switch_inverter_VSI(0.2f,0.5f, valor*0.02f,false);
+
+
+
+	
+	/*if(counter >=10)// Print frequency each n cycles
 	{
-		counter2+=1;
+		
+		SVM_voltage_switch_inverter_VSI(0.2f,0.5f, valor*0.02f,false);
+
         voltage_joint_0	= voltage_measure (ADC1,ADC_CHANNEL1);      
         //voltage_joint_1	= voltage_measure (ADC1,ADC_CHANNEL2);
         //voltage_joint_2 = voltage_measure (ADC1,ADC_CHANNEL3);
@@ -366,9 +399,16 @@ void tim1_up_tim10_isr(void)
         joint_0_angle = CONVERSION_FACTOR_JOINT_0*voltage_joint_0;
         //joint_1_angle = CONVERSION_FACTOR_JOINT_1*voltage_joint_1;
         //joint_2_angle = CONVERSION_FACTOR_JOINT_2*voltage_joint_2;  
-        printf("%6.2f \n",joint_0_angle); 
+        //printf("%6.2f \n",joint_0_angle); 
 		counter=0;
-	}	
+		if(counter2<9){
+			//counter2+=1;
+		}
+		else{
+			counter2=2;
+		}
+		
+	}*/
 
   }
 
@@ -459,8 +499,7 @@ int main(void)
 
     while (1)
     {
-    	SVM_voltage_switch_inverter_VSI(0.2f,0.5f,counter2*0.5f,false);
- 
+    	
     }
 
 
