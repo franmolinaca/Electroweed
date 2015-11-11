@@ -8,76 +8,66 @@
 
 \title{Propuesta proyecto final\\ Laboratorio de Microcontroladores}
 \author{
- Marco Antonio Montero ChavarrÌ≠a CarnÈ: A94000\\
+ Marco Antonio Montero Chavarr√≠¬≠a Carn√©: A94000\\
   \and
-  Francisco Molina CarnÈ: B14194\\  
+  Francisco Molina Carn√©: B14194\\  
 }
 \maketitle
 
-\section{InvestigaciÛn Previa}
-En este proyecto final se desea crear un controlador para una motocicleta elÈctrica, que sea capaz de cambiar la velocidad del motor
-de la motocicleta, que indique adem·s la velocidad instantanea y por ˙ltimo que pueda encender y apagar el motor. Adem·s
-poder usar el mismo controlador para controlar el sistema de luces de la motocicleta.\\
-Como una pequeÒa introducciÛn una motocicleta o scooter elÈctrica es una motocicleta que utiliza un motor elÈctrico 
-como medio de propulsiÛn.
-Al igual que el automÛvil elÈctrico no produce contaminaciÛn atmosfÈrica ni contaminaciÛn sonora en el lugar de uso.
-Se han desarrollado algunos prototipos de pilas de combustible, siendo algunos ejemplos el ENV de Intelligent Energy, 
-el scooter de Honda que utiliza el Honda FC Stack, y el el Yamaha FC-AQEL.TambiÈn se est·n en desarrollo prototipos de 
-motocicletas hÌbridas con motor de gasolina y motor elÈctrico. Algunos ejemplos son el Ecycle, y el Yamaha Gen-RYU.
-No obstante, los modelos en producciÛn son de baterÌas.
-\\
-El principal problema que se puede tener con este trabajo es el tipo de alimentaciÛn que se debe usar para el motor de la motocicleta
-ya que no se utilizan baterias DC usadas com˙nmente en electrodomÈsticos o baterÌas AC como las de un automÛvil sino baterias especiales DC 
-que no se descarguen con tanta facilidad, para poder manejar el consumo de corriente que pedir· el motor, 
-de lo contrario no se podr· aumentar velocidades con f·cilidad o la motocicleta se apagarÌa constantenmente.
-Existen baterias en el mercado capaces de cumplir con las necesidades de un motor DC como el de una motocicleta elÈctrica,se les 
-conoce como: "BaterÌas de ciclo profundo".
-\\
-Las baterÌas de ciclo profundo guardan energÌa de modo que las fuentes de la corriente  elÈctrica  
-las  recarguen  por  medio  de  los alternadores,  paneles solares, molinos de viento, etc. 
-La diferencia fundamental entre estas baterÌas y las de ciclo corto como las de un automotor, 
-radica en el uso que uno hace de ellas. Para  explicarlo claramente veamos como es el caso de los automotores. Se 
-necesita  mucha  corriente  de  arranque  y que una baterÌa pueda entregar esa energÌa en corto tiempo. 
-Entre 300 y 600 amper en unos 3 a 5 segundos. Luego la baterÌa se recarga r·pidamente y no hace falta siquiera que estÈ 
-presente. El alternador provee  de toda la energÌa necesaria para el funcionamiento del sistema elÈctrico automotor. 
-Partiendo de una baterÌa 100 porciento cargada, el consumo de energÌa que hemos hecho no supera el 5 porcierto. 
-De aquÌ que se trata de una baterÌa de ciclo corto. En estas baterÌas se suele tomar varias veces la capacidad de la baterÌa 
-en poco tiempo. Ejemplo, baterÌa de 65 amperes se toma 300 a 600 amperes en 3 a 5 segundos. 
-En sistemas de iluminaciÛn, las cargas aplicadas a las baterÌas guardan cierta relaciÛn con su capacidad y adem·s suelen 
-ser muy pequeÒas al respecto de la  capacidad  de  la baterÌa.  Se  toma energÌa  por debajo de  la  capacidad  de  la misma.  
-Ejemplo, baterÌa de 65  amper, se toma 3 amper a lo largo de 10 horas. 
-Estas baterÌas son denominadas de ciclo profundo ya que admiten ser descargadas en un 90 porciento. 
+\section{Investigaci√≥n Previa}
+Se crear√° un controlador para una motocicleta el√©ctrica, capaz de cambiar la velocidad del motor y llevar un registro del manejo de consumo de energ√≠a as√≠ como de la velocidad instantanea para contar con datos de desempe√±o en diferentes situaciones. Adicionalmente se le agregar√°n funcionalidades como el sistema de luces y direccionales, entre otros que sean de inter√©s en caso de cumplir los objetivos iniciales.\\
 
-\section{SoluciÛn Propuesta}
-Aplicando lo visto a lo largo del curso en los 4 proyectos, tomar el microcontrolador STM32F4 y crear el sistema de control,
-para un motor m·s grande como el de una motocicleta y adem·s tomar otras salidas de control para manejar seÒales de control, 
-como igniciÛn, luces y herramientas de seÒalizaciÛn como un velocÌmetro.
-Esto es lograble tomando en cuenta que en el laboratorio 4 se aprendiÛ a controlar un motor DC pequeÒo, quedar· extrapolar este 
-conocimiento a un motor m·s robusto y grande.
-El manejo de luces se puede hacer con cualquiera de los pines de salida vistos en el laboratorio 2 y la lÛgica que se debe aÒadir
-es poder obtener la velocidad del motor por medio del controlador para desplegarlo en pantalla. M·s a˙n para el manejo de la 
-igniciÛn se utilizar· un sistema parecido al sistema de sensor t·ctil utilizado en el laboratorio 2, esto para enviar una seÒal
-"contacto" al microcontrolador y que el sepa que debe encender el motor.
+Una motocicleta o scooter el√©ctrica es una motocicleta que utiliza un motor el√©ctrico como medio de propulsi√≥n.
+Al igual que el autom√≥vil el√©ctrico no produce contaminaci√≥n atmosf√©rica ni contaminaci√≥n sonora en el lugar de uso.
+Se han desarrollado algunos prototipos de pilas de combustible, siendo algunos ejemplos el ENV de Intelligent Energy, 
+el scooter de Honda que utiliza el Honda FC Stack, y el el Yamaha FC-AQEL.Tambi√©n se est√°n en desarrollo prototipos de 
+motocicletas h√≠bridas con motor de gasolina y motor el√©ctrico. Algunos ejemplos son el Ecycle, y el Yamaha Gen-RYU.
+No obstante, los modelos en producci√≥n son de bater√≠as. \\
+
+Entre los principales problemas que se puede tener con este trabajo es el tipo de alimentaci√≥n que se debe usar para el motor de la motocicleta, as√≠ como el tipo de motor que se quiere utilizar. Para el tipo de motor, se requiere una alta eficiencia, por lo que se consider√≥ como mejor opci√≥n un motor sin escobillas, que cuenta en general con mayor relaci√≥n torque/watt y mayor durabilidad que un motor con escobillas. \\
+Para el caso de las bater√≠as, se necesita asimismo de alta eficiencia y mayor porcentaje de descarga, para poder manejar el consumo de corriente que pedir√° el motor y prolongar el tiempo de uso del mismo. Para ellos se considerar√° el uso de diferentes baster√≠as, ya sea las conocidas como bater√≠as de ciclo profundo, Litio y √≥xido de cobalto(LiCoO2), o bien Litio y fosfato de hierro(LiFePO4). \\
+En el caso de las de ciclo profundo, la diferencia fundamental entre estas bater√≠as y las de ciclo corto como las de un automotor, radica en el uso que uno hace de ellas. En el caso de los automotores, se necesita  mucha  corriente de arranque y que una bater√≠a pueda entregar esa energ√≠a en corto tiempo. 
+Entre 300 y 600 amper en unos 3 a 5 segundos. Luego la bater√≠a se recarga r√°pidamente y no hace falta siquiera que est√© presente ya que el alternador provee de toda la energ√≠a necesaria para el funcionamiento del sistema el√©ctrico automotor. Partiendo de una bater√≠a 100 porciento cargada, el consumo de energ√≠a que hemos hecho no supera el 5 porciento. 
+De aqu√≠ que se necesite una bater√≠a de ciclo corto. En sistemas de iluminaci√≥n, las cargas aplicadas a las bater√≠as guardan cierta relaci√≥n con su capacidad y adem√°s suelen 
+ser muy peque√±as al respecto de la  capacidad  de  la bater√≠a. Se toma energ√≠a por debajo de la capacidad de la misma.  Ejemplo, para una bater√≠a de 65  amper, se toma 3 amper a lo largo de 10 horas. Estas bater√≠as son denominadas de ciclo profundo ya que admiten ser descargadas aproximadamente hasta un 90 porciento. \\
+Para las bater√≠as de Litio y √≥xido de cobalto(LiCoO2) y Litio y fosfato de hierro(LiFePO4), las de cobalto son las comunes en el mercado, con gran capacidad y eficiencia en comparaci√≥n con las de plomo, sin embargo cuentan con menor estabilidad pero mayor densidad energ√©tica que otras bater√≠as de ion de Litio con otro compuestos. En el caso de la LiFePO4, esta cuenta con una menor densidad energ√©tica, pero ofrece tiempos de vida mas largos, mayor rango de corriente exigida y son considerablemente mas seguras.\\
+Por √∫tlimo en componentes para simular los luces se utilizar√≠an LEDs de diferentes colores junto con botoneras,
+
+*****************hablar de un potenciometro y del stm 32, pensar en un puentes h para los motores por el consumo de corriente********
+*****************poner alguna forma de obtener un feedback del motor, como un encoder √≥ptico o un sensor de efecto hall*******
+
+
+\section{Soluci√≥n Propuesta}
+Aplicando lo visto a lo largo del curso en los 4 proyectos, tomar el microcontrolador STM32F4 y crear el sistema de control, para un motor m√°s grande como el de una motocicleta y adem√°s tomar otras salidas de control para manejar se√±ales de control, como ignici√≥n, luces y herramientas de se√±alizaci√≥n como un veloc√≠metro.
+Esto es lograble tomando en cuenta que en el laboratorio 4 se aprendi√≥ a controlar un motor DC peque√±o, quedar√° extrapolar este  conocimiento a un motor m√°s robusto y grande.
+El manejo de luces se puede hacer con cualquiera de los pines de salida vistos en el laboratorio 2 y la l√≥gica que se debe a√±adir es poder obtener la velocidad del motor por medio del controlador para desplegarlo en pantalla. M√°s a√∫n para el manejo de la ignici√≥n se utilizar√° un sistema parecido al sistema de sensor t√°ctil utilizado en el laboratorio 2, esto para enviar una se√±al "contacto" al microcontrolador y activar el paso de corriente al motor.
 
 \section{Procedimiento}
 \begin{itemize}
-\item Comunicar el microcontrolador con un motor DC de ser posible tamaÒo apto para una motocicleta elÈctrica sino uno semejante, como los
-usados en el arcoslab. Esto se lograr· usando un cÛdigo similar al laboratorio 4.
-\item Adaptar este cÛdigo para que tome en cuenta una entrada de un sensor t·ctil o alg˙n tipo de igniciÛn similar a la de los carros.
-\item Mostrar en pantalla velocidad del motor. Esto por medio de un programa de comunicaciÛn similar al del laboratorio 2.
-\item AÒadir cualidades fÌsicas de una motocicleta de ser posible. Entre esto calza la posibilidad de tener una carcaza que dar· soporte
-al motor,las baterias y un espacio para el microcontrolador y la igniciÛn.
+\item Comunicar el microcontrolador con un motor DC de ser posible tama√±o apto para una motocicleta el√©ctrica sino uno semejante, como los
+usados en el arcoslab. Esto se lograr√° usando un c√≥digo similar al laboratorio 4.
+\item Adaptar este c√≥digo para que tome en cuenta una entrada de un sensor t√°ctil o alg√∫n tipo de ignici√≥n similar a la de los carros.
+\item Mostrar en pantalla velocidad del motor. Esto por medio de un programa de comunicaci√≥n similar al del laboratorio 2.
+\item A√±adir cualidades f√≠sicas de una motocicleta de ser posible. Entre esto calza la posibilidad de tener una carcaza que dar√° soporte
+al motor,las baterias y un espacio para el microcontrolador y la ignici√≥n.
 \end{itemize}
 \section{Observaciones y recomendaciones}
-RecomendaciÛn leer la documentaciÛn del STM32F4 a fondo para determinar si es capaz de manejar las tensiones y las corrientes 
-requeridas por el motor a utilizar y asÌ saber si es necesario utilizar circuitos de protecciÛn y/o alg˙n otra configuraciÛn
-electrÛnica adicional.
+Recomendaci√≥n leer la documentaci√≥n del STM32F4 a fondo para determinar si es capaz de manejar las tensiones y las corrientes 
+requeridas por el motor a utilizar y as√≠ saber si es necesario utilizar circuitos de protecci√≥n y/o alg√∫n otra configuraci√≥n
+electr√≥nica adicional.
 
 \bibliographystyle{alpha} 
 
-%estos son los links de donde saliÛ casi todo panchis
+%estos son los links de donde sali√≥ casi todo panchis
 %http://www.cavadevices.com/archivos/FOLLETOS/BATERIAS%20CICLO%20PROFUNDO.pdf baterias de ciclo profundo
-% http://www.technologyreview.com/news/406928/making-electric-vehicles-practical/ moto elÈctrica
+% http://www.technologyreview.com/news/406928/making-electric-vehicles-practical/ moto el√©ctrica
+
+%mae estee aca hay algunas otras refs (fuck wikipedia)
+%https://en.wikipedia.org/wiki/Brushless_DC_electric_motor#Brushless_vs._brushed_motors
+%http://www.edn.com/design/sensors/4406682/Brushless-DC-Motors---Part-I--Construction-and-Operating-Principles
+%https://en.wikipedia.org/wiki/Lithium_iron_phosphate_battery
+%
+
 \bibliography{refs}
 
 
