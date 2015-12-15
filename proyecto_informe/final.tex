@@ -1,0 +1,70 @@
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{pProyecto final\\ Laboratorio de Microcontroladores\\ Construcción y programación de un circuito de control para un motor DC}
+\author{
+ Marco Antonio Montero Chavarrí­a Carné: A94000\\
+ \and
+ Francisco Molina Carné: B14194}
+\maketitle
+
+\section{Objetivo general}
+\begin{itemize}
+\item Construir un sistema de control para un motor DC a partir de una entrada DC y el microcontrolador STMF4.
+\end{itemize}
+
+\section{Introducción}
+
+En el trabajo previo se indicó que se deseaba construir una motocicleta eléctrica. Lastimosamente durante el seguimiento y creación del proyecto, se percató que la
+construcción del circuito de control conllevaría un tiempo total, mayor al del tiempo destinado para todo el proyecto, por lo cual se decidió enfocar el tiempo limitado
+en terminar dicho controlador y continuar con el resto del proyecto a futuro. 
+Por lo tanto el siguiente informe ahondará en temas necesarios para el correcto entendimiento de los pasos seguidos 
+a la hora de conectar y programar el microcontrolador usando al motor DC y además presentará el esquemático final del proyecto que indica la conexión entre 
+el motor, la fuente y el microcontrolador.
+
+\section{Solución Final}
+Para la solución final se debió soldar durante 2 clases del curso los cables y conectores necesarios para poner en funcionamiento un puente trifásico del ARCOS-LAB. El puente
+trifásico se encargará de enviar la potencia necesaria al motor DC a partir de la tensión de entrada de la bateria y los 3V que pone de limite el STM.
+Esto permitirá al stmf4 manejar la tensión final que llegará al motor DC por si se requiere aumentar o disminuir la velocidad de rotación.
+Cabe destacar que el motor DC utilizado es un motor de imanes permanentes. La conexión final entre fuente,STM y motor quedó de la siguiente forma:
+ (insert diagrama XD)
+ 
+La comunicación entre el STMF4 y el usuario se empleo de manera similar al laboratorio 4. Primero se tiene el programa en C que se encarga de la parte de comunicación
+con el motor, es decir activación de pines y manejo de señales físicas. Y segundo se tiene el programa en Python que envia los valores que se quieren de velocidad de rotación de parte del usuario.
+A diferencia del proyecto anterior no se utilizó la librería estandár del curso para el STM, sino que se utilizó la librería privada del ARCOSLAB que probó ser sumamente importante para el proyecto ya
+que tiene lo necesario para el programa de C necesario para controlador el Motor. 
+Entre los mútiples archivos de C obtenidos de la librería están los archivos y el código necesario para un PID que se encargó
+de controlar la señal final que llega al motor. Además están los códigos de los métodos necesarios para lectura de pines como los métodos ADC y ADC int. También están los métodos utilizados en prácticas
+anteriores, que definen "timers", entre otras cosas.
+
+ 
+ 
+
+\section{Innovación}
+Como innovación se le añadió un circuito con un potenciometro en uno de los pines del STM para hacer un cambió en el funcionamiento del programa, para que el motor cambié su velocidad 
+de acuerdo a variaciones en el potenciometro y no de acuerdo a variaciones escritas por el usuario en pantalla. Esto en realidad era un idea presente en la propuesta inicial pero se puede tomar como innovación
+para esta parte del proyecto debido a que el código original de opencoroco para este tipo de sistema creado para el proyecto no presenta está anexión. Por lo tanto se tuvo que hacer cambios en el código en C
+para que el STM leyerá información de un puerto extra, el puerto asignado fue "PA10". Luego este valor se tomo como variable necesaria para el calculo del ciclo de trabajo final que se le pedirá al motor, por lo tanto
+la variación en la resistencia del potenciometro equivaldrá a un cambio entre 0-3V y esto limitará de manera proporsional la señal final que llegará al motor. Por lo tanto el potenciómetro funcionará 
+similar a un acelerador de una motocicleta mecánica.
+
+\section{Observaciones y recomendaciones}
+Como observación importante el git privado del ARCOSLAB brindó el gran bagaje de código en C necesario para el correcto funcionamiento del proyecto,sin el la tarea hubiera sido aún más laboriosa o imposible de realizar
+ya que por si solo el STM no tiene muchos ejemplos de este tipo de proyectos en la Web. 
+Recomendación final para continuación del proyecto faltaría una parte de conexión a una motocicleta eléctrica a la que le haga falta su controlador.
+Además una parte de inspección sobre si el cableado es apto para aguantar las corrientes necesarias para el funcionamiento de la motocicleta, ya que se trabajó en el laboratorio con un
+motor DC de un tamaño ligeramente pequeño, un motor de una motocicleta eléctrica es de mucho mayor tamaño y además requiere por lo tanto corrientes y tensiones más altas para un correcto funcionamiento.
+Por último sería bueno una correcta documentación del código ya que a pesar de que el git tiene todo lo necesario, el código tiene métodos y variables sin comentar que no se puede explicar de manera fácil sin conocer el código a priori, lo cual
+conlleva a un consumo de tiempo de trabajo grande al principío del trabajo porque se requiere entender primero todo el código y el mismo no es tan simple.
+
+\bibliographystyle{alpha} 
+\bibliography{refs}
+
+
+
+\end{document}
