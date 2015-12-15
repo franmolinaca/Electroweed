@@ -32,29 +32,28 @@ Para la solución final se debió soldar durante 2 clases del curso los cables y
 trifásico se encargará de enviar la potencia necesaria al motor DC a partir de la tensión de entrada de la bateria y los 3V que pone de limite el STM.
 Esto permitirá al stmf4 manejar la tensión final que llegará al motor DC por si se requiere aumentar o disminuir la velocidad de rotación.
 Cabe destacar que el motor DC utilizado es un motor de imanes permanentes por lo tanto ocupa 3 corrientes AC separadas cada una a 120° con una tensión necesaria de 12V. La conexión final entre fuente,STM y motor quedó de la siguiente forma:
- (insert diagrama XD)
+ %(insert diagrama XD o foto del proyecto)
  
-El puente trifásico y el STMF4 se encargaran de manejar los ciclos de trabajo de una onda PWM y por medio de "step downs" con el controlador PID del código de open coroco generará una onda semi-senosoidal suavizada para enviarla al motor. 
+El puente trifásico generará 3 ondas cuadras separadas a 120° y el STMF4 se encargara de manejar los ciclos de trabajo de esas señales y por medio de "step downs" con el controlador PID del código de open coroco generará una onda semi-senosoidal suavizada para enviarla al motor. 
 Cumpliendo así con la necesidad de corriente AC que presenta el motor.
  
 La comunicación entre el STMF4 y el usuario se empleo de manera similar al laboratorio 4. Primero se tiene el programa en C que se encarga de la parte de comunicación
 con el motor, es decir activación de pines y manejo de señales físicas. Y segundo se tiene el programa en Python que envia los valores que se quieren de velocidad de rotación de parte del usuario.
 A diferencia del proyecto anterior no se utilizó la librería estandár del curso para el STM, sino que se utilizó la librería privada del ARCOSLAB que probó ser sumamente importante para el proyecto ya
 que tiene lo necesario para el programa de C necesario para controlador el Motor. 
-Entre los mútiples archivos de C obtenidos de la librería están los archivos y el código necesario para un PID que se encargó
+Entre los mútiples archivos de C obtenidos de la librería están los archivos y el código necesario para el PID,que se mencionó anteriormente, que se encargó
 de controlar la señal final que llega al motor. Además están los códigos de los métodos necesarios para lectura de pines como los métodos ADC y ADC int. También están los métodos utilizados en prácticas
 anteriores, que definen "timers", entre otras cosas.
-
+%(insert foto del código)
  
- 
-
 \section{Innovación}
 Como innovación se le añadió un circuito con un potenciometro en uno de los pines del STM para hacer un cambió en el funcionamiento del programa, para que el motor cambié su velocidad 
 de acuerdo a variaciones en el potenciometro y no de acuerdo a variaciones escritas por el usuario en pantalla. Esto en realidad era un idea presente en la propuesta inicial pero se puede tomar como innovación
 para esta parte del proyecto debido a que el código original de opencoroco para este tipo de sistema creado para el proyecto no presenta está anexión. Por lo tanto se tuvo que hacer cambios en el código en C
-para que el STM leyerá información de un puerto extra, el puerto asignado fue "PA10". Luego este valor se tomo como variable necesaria para el calculo del ciclo de trabajo final que se le pedirá al motor, por lo tanto
+para que el STM leyerá información de un puerto extra, el puerto asignado fue "PC5". Luego este valor será leído por método ADC, se tomo como variable necesaria para el calculo del ciclo de trabajo final que se le enviará al motor, por lo tanto
 la variación en la resistencia del potenciometro equivaldrá a un cambio entre 0-3V y esto limitará de manera proporsional la señal final que llegará al motor. Por lo tanto el potenciómetro funcionará 
 similar a un acelerador de una motocicleta mecánica.
+%(insertar fotillo del pot)
 
 \section{Observaciones y recomendaciones}
 Como observación importante el git privado del ARCOSLAB brindó el gran bagaje de código en C necesario para el correcto funcionamiento del proyecto,sin el la tarea hubiera sido aún más laboriosa o imposible de realizar
@@ -62,12 +61,15 @@ ya que por si solo el STM no tiene muchos ejemplos de este tipo de proyectos en 
 Recomendación final para continuación del proyecto faltaría una parte de conexión a una motocicleta eléctrica a la que le haga falta su controlador.
 Además una parte de inspección sobre si el cableado es apto para aguantar las corrientes necesarias para el funcionamiento de la motocicleta, ya que se trabajó en el laboratorio con un
 motor DC de un tamaño ligeramente pequeño, un motor de una motocicleta eléctrica es de mucho mayor tamaño y además requiere por lo tanto corrientes y tensiones más altas para un correcto funcionamiento.
+El puente trifásico tuvo que ser cambiado 1 vez, ya que el primero no funcionó, de ser necesario para futuros proyectos sería bueno probarlo antes de soldar sobre el cables y o adaptadores para los últimos.
 Por último sería bueno una correcta documentación del código ya que a pesar de que el git tiene todo lo necesario, el código tiene métodos y variables sin comentar que no se puede explicar de manera fácil sin conocer el código a priori, lo cual
 conlleva a un consumo de tiempo de trabajo grande al principío del trabajo porque se requiere entender primero todo el código y el mismo no es tan simple.
+(añada alguna vaina ahí como de quemar cosas o algo así si quiere xD)
+
 
 \bibliographystyle{alpha} 
 \bibliography{refs}
-
+%(open coroco??? si se puede tomar como una XD)
 
 
 \end{document}
