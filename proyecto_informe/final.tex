@@ -31,8 +31,11 @@ el motor, la fuente y el microcontrolador.
 Para la solución final se debió soldar durante 2 clases del curso los cables y conectores necesarios para poner en funcionamiento un puente trifásico del ARCOS-LAB. El puente
 trifásico se encargará de enviar la potencia necesaria al motor DC a partir de la tensión de entrada de la bateria y los 3V que pone de limite el STM.
 Esto permitirá al stmf4 manejar la tensión final que llegará al motor DC por si se requiere aumentar o disminuir la velocidad de rotación.
-Cabe destacar que el motor DC utilizado es un motor de imanes permanentes. La conexión final entre fuente,STM y motor quedó de la siguiente forma:
+Cabe destacar que el motor DC utilizado es un motor de imanes permanentes por lo tanto ocupa 3 corrientes AC separadas cada una a 120° con una tensión necesaria de 12V. La conexión final entre fuente,STM y motor quedó de la siguiente forma:
  (insert diagrama XD)
+ 
+El puente trifásico y el STMF4 se encargaran de manejar los ciclos de trabajo de una onda PWM y por medio de "step downs" con el controlador PID del código de open coroco generará una onda semi-senosoidal suavizada para enviarla al motor. 
+Cumpliendo así con la necesidad de corriente AC que presenta el motor.
  
 La comunicación entre el STMF4 y el usuario se empleo de manera similar al laboratorio 4. Primero se tiene el programa en C que se encarga de la parte de comunicación
 con el motor, es decir activación de pines y manejo de señales físicas. Y segundo se tiene el programa en Python que envia los valores que se quieren de velocidad de rotación de parte del usuario.
