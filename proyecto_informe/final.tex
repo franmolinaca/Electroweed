@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\title{pProyecto final\\ Laboratorio de Microcontroladores\\ Construcción y programación de un circuito de control para un motor DC}
+\title{Proyecto final\\ Laboratorio de Microcontroladores\\ Construcción y programación de un circuito de control para un motor sincrónico}
 \author{
  Marco Antonio Montero Chavarrí­a Carné: A94000\\
  \and
@@ -15,32 +15,27 @@
 
 \section{Objetivo general}
 \begin{itemize}
-\item Construir un sistema de control para un motor DC a partir de una entrada DC y el microcontrolador STMF4.
+\item Simular un sistema de control para un motocicleta eléctrica a partir de un motor sincrónico de 12V con una entrada DC y el microcontrolador STM32-F4-Discovery.
 \end{itemize}
 
 \section{Introducción}
 
-En el trabajo previo se indicó que se deseaba construir una motocicleta eléctrica. Lastimosamente durante el seguimiento y creación del proyecto, se percató que la
-construcción del circuito de control conllevaría un tiempo total, mayor al del tiempo destinado para todo el proyecto, por lo cual se decidió enfocar el tiempo limitado
-en terminar dicho controlador y continuar con el resto del proyecto a futuro. 
-Por lo tanto el siguiente informe ahondará en temas necesarios para el correcto entendimiento de los pasos seguidos 
-a la hora de conectar y programar el microcontrolador usando al motor DC y además presentará el esquemático final del proyecto que indica la conexión entre 
-el motor, la fuente y el microcontrolador.
+En el trabajo previo se indicó que se deseaba construir una motocicleta eléctrica, lastimosamente durante el seguimiento y creación del proyecto, se percató que la
+construcción de la misma conllevaría un tiempo total mayor al del tiempo destinado para todo el proyecto, por lo cual se decidió enfocar el tiempo limitado
+en simular dicho controlador y continuar con el resto del proyecto a futuro. El siguiente informe trata los pasos seguidos a la hora de conectar y programar el microcontrolador utilizado y además presentará el esquemático final del proyecto que indica la conexión entre el motor, la fuente y el microcontrolador.
 
 \section{Solución Final}
-Para la solución final se debió soldar durante 2 clases del curso los cables y conectores necesarios para poner en funcionamiento un puente trifásico del ARCOS-LAB. El puente
-trifásico se encargará de enviar la potencia necesaria al motor DC a partir de la tensión de entrada de la bateria y los 3V que pone de limite el STM.
-Esto permitirá al stmf4 manejar la tensión final que llegará al motor DC por si se requiere aumentar o disminuir la velocidad de rotación.
-Cabe destacar que el motor DC utilizado es un motor de imanes permanentes por lo tanto ocupa 3 corrientes AC separadas cada una a 120° con una tensión necesaria de 12V. La conexión final entre fuente,STM y motor quedó de la siguiente forma:
+Para el modelado se optó por utilizar un puente trifásico del ARCOS-LAB,  para el cual se debió soldar los cables y conectores necesarios para su correcto funcionamiento. Este puente trifásico se encarga de mediar entre el sistema de control programado en el STM y la potencia necesaria para alimentar el motor birndada por la batería, permitiendo al STM32-F4-Discovery manejar la tensión final que llegará al motor sincrónico en cada una de sus fases separada por 120 grados, lo que brinda diferentes formas de control para aumentar o disminuir la velocidad de rotación.
+
+La conexión final entre fuente, STM y motor quedó de la siguiente forma:
  %(insert diagrama XD o foto del proyecto)
  
-El puente trifásico generará 3 ondas cuadras separadas a 120° y el STMF4 se encargara de manejar los ciclos de trabajo de esas señales y por medio de "step downs" con el controlador PID del código de open coroco generará una onda semi-senosoidal suavizada para enviarla al motor. 
+En controles rudimentarios, debida a la naturaleza DC de las baterías, el puente trifásico propaga 3 ondas cuadras separadas a 120 grados, en controladores un poco mejores, el STMF4 se encargara de manejar los ciclos de trabajo de esas señales y por medio de "step downs" simular una onda AC. Con el controlador PID del código de open coroco la onda generada gracias al algoritmo es una onda semi-senosoidal suavizada para enviarla al motor sin que se golpee bruscamente.
 Cumpliendo así con la necesidad de corriente AC que presenta el motor.
  
 La comunicación entre el STMF4 y el usuario se empleo de manera similar al laboratorio 4. Primero se tiene el programa en C que se encarga de la parte de comunicación
 con el motor, es decir activación de pines y manejo de señales físicas. Y segundo se tiene el programa en Python que envia los valores que se quieren de velocidad de rotación de parte del usuario.
-A diferencia del proyecto anterior no se utilizó la librería estandár del curso para el STM, sino que se utilizó la librería privada del ARCOSLAB que probó ser sumamente importante para el proyecto ya
-que tiene lo necesario para el programa de C necesario para controlador el Motor. 
+A diferencia del proyecto anterior no se utilizó la librería estandár del curso para el STM, sino que se utilizó la librería privada del ARCOSLAB que probó ser sumamente importante para el proyecto ya que tiene lo necesario para el programa de C necesario para controlador el Motor. 
 Entre los mútiples archivos de C obtenidos de la librería están los archivos y el código necesario para el PID,que se mencionó anteriormente, que se encargó
 de controlar la señal final que llega al motor. Además están los códigos de los métodos necesarios para lectura de pines como los métodos ADC y ADC int. También están los métodos utilizados en prácticas
 anteriores, que definen "timers", entre otras cosas.
@@ -59,12 +54,10 @@ similar a un acelerador de una motocicleta mecánica.
 Como observación importante el git privado del ARCOSLAB brindó el gran bagaje de código en C necesario para el correcto funcionamiento del proyecto,sin el la tarea hubiera sido aún más laboriosa o imposible de realizar
 ya que por si solo el STM no tiene muchos ejemplos de este tipo de proyectos en la Web. 
 Recomendación final para continuación del proyecto faltaría una parte de conexión a una motocicleta eléctrica a la que le haga falta su controlador.
-Además una parte de inspección sobre si el cableado es apto para aguantar las corrientes necesarias para el funcionamiento de la motocicleta, ya que se trabajó en el laboratorio con un
-motor DC de un tamaño ligeramente pequeño, un motor de una motocicleta eléctrica es de mucho mayor tamaño y además requiere por lo tanto corrientes y tensiones más altas para un correcto funcionamiento.
+Además una parte de inspección sobre si el cableado es apto para aguantar las corrientes necesarias para el funcionamiento de la motocicleta, ya que se trabajó en el laboratorio con un motor DC de un tamaño ligeramente pequeño, un motor de una motocicleta eléctrica es de mucho mayor tamaño y además requiere por lo tanto corrientes y tensiones más altas para un correcto funcionamiento.
 El puente trifásico tuvo que ser cambiado 1 vez, ya que el primero no funcionó, de ser necesario para futuros proyectos sería bueno probarlo antes de soldar sobre el cables y o adaptadores para los últimos.
 Por último sería bueno una correcta documentación del código ya que a pesar de que el git tiene todo lo necesario, el código tiene métodos y variables sin comentar que no se puede explicar de manera fácil sin conocer el código a priori, lo cual
 conlleva a un consumo de tiempo de trabajo grande al principío del trabajo porque se requiere entender primero todo el código y el mismo no es tan simple.
-(añada alguna vaina ahí como de quemar cosas o algo así si quiere xD)
 
 
 \bibliographystyle{alpha} 
